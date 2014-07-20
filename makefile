@@ -7,6 +7,7 @@ TARGET = kernel.img
 LIST = kernel.list
 MAP = kernel.map
 LINKER = kernel.ld
+PUBDIR = /media/sf_winshare
 
 OBJS	:= $(patsubst $(SOURCE)%.s,$(BUILD)%.o,$(wildcard $(SOURCE)*.s))
 OBJS	+= $(patsubst $(SOURCE)%.c,$(BUILD)%.o,$(wildcard $(SOURCE)*.c))
@@ -15,6 +16,9 @@ CFLAGS	:= -O2 -fpic -pedantic -pedantic-errors -Wall -Wextra
 CFLAGS	+= -ffreestanding -fomit-frame-pointer -mcpu=arm1176jzf-s
 
 all : $(TARGET) $(LIST)
+
+pub	: all
+	cp $(TARGET) $(PUBDIR)
 
 $(LIST) : $(BUILD)output.elf
 	$(ARMGNU)-objdump -d $(BUILD)output.elf > $(LIST)

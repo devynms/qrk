@@ -1,5 +1,6 @@
 #include "int.h"
 #include "gpio.h"
+#include "qrassert.h"
 
 static volatile word * pGpio = (word *)(0x20200000);
 
@@ -20,6 +21,9 @@ i32 GpioSetOutput (word pin)
 	}
 
 	*(pGpio+(pin/10)) |= (1 << ((pin%10)*3));
+	// assert((1 << ((pin%10)*3)) == (1 << 18));
+	// assert((pGpio+(pin/10)) == ((word*)(0x20200004)));
+
 	return 1;
 }
 
