@@ -1,7 +1,7 @@
 #include "int.h"
 #include "gpio.h"
 
-static word * pGpio = (word *)(0x20200000);
+static volatile word * pGpio = (word *)(0x20200000);
 
 i32 GpioSetInput (word pin)
 {
